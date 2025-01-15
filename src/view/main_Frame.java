@@ -6,6 +6,7 @@ package view;
 import controller.*;
 import javax.swing.JOptionPane;
 import util.*;
+import view_table_model.MTableInforme;
 /**
  *
  * @author JAIMEUNL
@@ -15,9 +16,37 @@ public class main_Frame extends javax.swing.JFrame {
     /**
      * Creates new form main_Frame
      */
+    private Informe informe = new Informe();
+    private MTableInforme mTableInforme = new MTableInforme();
+    
+    private void cargarTabla(){
+        mTableInforme.setInforme(informe);
+        tblTablita.setModel(mTableInforme);
+        tblTablita.updateUI();
+    }
+    
+    private void crearArreglos(){
+        Utiles util = new Utiles();
+        String year = yearIndex.getText();
+        
+        if(year.isEmpty()|| year == null || util.validateInt(year) == false || year.length() > 4 || year.length() < 4){
+            JOptionPane.showMessageDialog(null, "Ingrese un valor entero de 4 digitos", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("ERROR");
+        }else{
+            informe.crear();
+            btnAgregar.setEnabled(true);
+            input_venta.setEnabled(true);
+            input_gasto.setEnabled(true);
+            box_months.setEnabled(true);
+            
+        }
+    }
+    
     public main_Frame() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,52 +58,21 @@ public class main_Frame extends javax.swing.JFrame {
     private void initComponents() {
 
         background = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         input_venta = new javax.swing.JTextField();
         input_gasto = new javax.swing.JTextField();
-        items_vendidos = new javax.swing.JTextField();
         box_months = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        yearIndex = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTablita = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"ENERO", null, null, null},
-                {"FEBRERO", null, null, null},
-                {"MARZO", null, null, null},
-                {"ABRIL", null, "", null},
-                {"MAYO", null, null, null},
-                {"JUNIO", null, null, null},
-                {"JULIO", null, null, null},
-                {"AGOSTO", null, null, null},
-                {"SEPTIEMBRE", null, null, null},
-                {"OCTUBRE", null, null, null},
-                {"NOVIEMBRE", null, null, null},
-                {"DICIEMBRE", null, null, null}
-            },
-            new String [] {
-                "Mes", "Items", "Ventas", "Gastos"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setPreferredSize(new java.awt.Dimension(300, 240));
-        jScrollPane1.setViewportView(jTable1);
-
-        background.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, 270));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel1.setText("INFORME DE VENTAS ANUALES");
@@ -83,6 +81,7 @@ public class main_Frame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         input_venta.setBorder(javax.swing.BorderFactory.createTitledBorder("Precio total ventas"));
+        input_venta.setEnabled(false);
         input_venta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 input_ventaActionPerformed(evt);
@@ -90,26 +89,36 @@ public class main_Frame extends javax.swing.JFrame {
         });
 
         input_gasto.setBorder(javax.swing.BorderFactory.createTitledBorder("Precio total gastos"));
-
-        items_vendidos.setBorder(javax.swing.BorderFactory.createTitledBorder("Items vendidos"));
-        items_vendidos.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        items_vendidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                items_vendidosActionPerformed(evt);
-            }
-        });
+        input_gasto.setEnabled(false);
 
         box_months.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE" }));
+        box_months.setBorder(javax.swing.BorderFactory.createTitledBorder("Mes"));
+        box_months.setEnabled(false);
         box_months.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_monthsActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.setEnabled(false);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        yearIndex.setBorder(javax.swing.BorderFactory.createTitledBorder("Año"));
+        yearIndex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearIndexActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Generar Tabla");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -119,38 +128,59 @@ public class main_Frame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(input_venta)
-                    .addComponent(input_gasto, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                    .addComponent(items_vendidos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(input_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAgregar))
+                    .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(35, 35, 35)
                 .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(items_vendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(input_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(btnAgregar))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
-        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 250, 240));
+        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 250, 320));
+
+        tblTablita.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tblTablita);
+
+        background.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 690, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 804, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,12 +199,7 @@ public class main_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_monthsActionPerformed
 
-    private void items_vendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_items_vendidosActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_items_vendidosActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         Informe informe = new Informe();
         Utiles utiles = new Utiles();
@@ -182,15 +207,23 @@ public class main_Frame extends javax.swing.JFrame {
         
         String mes = (String)box_months.getSelectedItem(); //mes
         
-        String items = items_vendidos.getText() != null ? items_vendidos.getText() : ""; //items
         String ventas = input_venta.getText() != null ? input_venta.getText() : ""; //ventas
         String gastos = input_gasto.getText() != null ? input_gasto.getText() : ""; //gastos
-        if(!items.isEmpty() && !ventas.isEmpty() && !gastos.isEmpty()){
-            System.out.println(mes + "\n" + utiles.transformStringInt(items)+"\n" + utiles.transformStringFloat(ventas)+"\n"+ utiles.transformStringFloat(gastos));
+        if(!ventas.isEmpty() && !gastos.isEmpty()){
+            System.out.println(mes + "\n" + utiles.transformStringFloat(ventas)+ "\n"+ utiles.transformStringFloat(gastos));
         }else{
-            JOptionPane.showMessageDialog(null, "Revise los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Llene todas las casillas", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void yearIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearIndexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yearIndexActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        crearArreglos();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,13 +263,14 @@ public class main_Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JComboBox<String> box_months;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JTextField input_gasto;
     private javax.swing.JTextField input_venta;
-    private javax.swing.JTextField items_vendidos;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblTablita;
+    private javax.swing.JTextField yearIndex;
     // End of variables declaration//GEN-END:variables
 }
