@@ -4,6 +4,7 @@
  */
 package controller;
 import view.*;
+import view_table_model.MTableInforme;
 /**
  *
  * @author JAIMEUNL
@@ -13,7 +14,7 @@ public class Informe {
     private String data[][];
     
     public String[][] getData(){
-    return data;
+        return data;
     }
     
     public void setData(String [][] data){
@@ -21,13 +22,10 @@ public class Informe {
     }
     
     
-        
-        
-    
     public void crear(){
         //Generar arreglo del informe anual
-        String[] meses_str = new String[]{
-            "MESES",
+        /*String[] meses_str = new String[]{
+            "PRUEBA",
             "ENERO",
             "FEBRERO",
             "MARZO",
@@ -39,32 +37,24 @@ public class Informe {
             "SEPTIEMBRE",
             "OCTUBRE",
             "NOVIEMBRE",
-            "DICIEMBRE",};
+            "DICIEMBRE",};*/
         
         String[] valores = new String[]{
             "Ventas",
-            "Gastos",};
+            "Gastos",
+            "Promedio"
+            };
         
-        this.data = new String[3][meses_str.length];
-        for(int i = 0; i<meses_str.length; i++){
-            data[0][i] = meses_str[i];
-            
-        }
+        this.data = new String[valores.length][13];
+        /*for(int i = 0; i<meses_str.length; i++){
+            data[0][i] = meses_str[i];   
+        }*/
+        
         for (int i = 0; i < valores.length; i++) {
-            data[i + 1][0] = valores[i]; // Iniciar desde la segunda fila
+            data[i][0] = valores[i]; // Iniciar desde la segunda fila
         }
+        
     }
-    
-    public static void print_matriz(Object[][] m) {
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[0].length; j++) {
-                System.out.print((m[i][j] != null ? m[i][j] : "") + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-    
     public Integer verificar() {
         Integer pos = -1;
         for (int i = 0; i < data.length; i++) {
@@ -81,13 +71,37 @@ public class Informe {
         return pos;
     }
     
-    public void agregarDato(String mes, Integer items, Float valor, Float gastos){
-        
+    public static void print_matriz(Object[][] m) {
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                System.out.print((m[i][j] != null ? m[i][j] : "") + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
     
-    public static void main(String[] args){
+    
+    
+    
+    public Boolean guardarDato(int mesIndex, String ventas, String gastos) {
+        if (mesIndex < 1 || mesIndex > 12) { // Validar el índice del mes
+            return false;
+        }
+
+        if (data.length < 2) {
+            return false; // Validar que existan al menos dos filas
+        }
+
+        data[0][mesIndex] = ventas; // Ventas en la fila 0
+        data[1][mesIndex] = gastos; // Gastos en la fila 1
+        return true;
+    }
+    
+    
+    /*public static void main(String[] args){
         Informe informe = new Informe();
         informe.crear();
         print_matriz(informe.getData());
-    }
+    }*/
 }

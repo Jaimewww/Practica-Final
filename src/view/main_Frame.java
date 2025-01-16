@@ -18,6 +18,7 @@ public class main_Frame extends javax.swing.JFrame {
      */
     private Informe informe = new Informe();
     private MTableInforme mTableInforme = new MTableInforme();
+    private Utiles utiles = new Utiles();
     
     private void cargarTabla(){
         mTableInforme.setInforme(informe);
@@ -38,7 +39,7 @@ public class main_Frame extends javax.swing.JFrame {
             input_venta.setEnabled(true);
             input_gasto.setEnabled(true);
             box_months.setEnabled(true);
-            
+            cargarTabla();
         }
     }
     
@@ -70,6 +71,7 @@ public class main_Frame extends javax.swing.JFrame {
         tblTablita = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(920, 650));
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,19 +132,18 @@ public class main_Frame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(input_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAgregar))
-                    .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(592, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,20 +151,23 @@ public class main_Frame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(35, 35, 35)
-                .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(input_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregar))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 250, 320));
+        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, -1, -1));
 
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblTablita.setBackground(new java.awt.Color(255, 255, 255));
         tblTablita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -174,17 +178,17 @@ public class main_Frame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblTablita);
 
-        background.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 690, 330));
+        background.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 900, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 804, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -198,30 +202,53 @@ public class main_Frame extends javax.swing.JFrame {
     private void box_monthsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_monthsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_monthsActionPerformed
+    
+    private Boolean verificar(){
+        String mes = (String) box_months.getSelectedItem(); //mes
 
+        String ventas = input_venta.getText() != null ? input_venta.getText() : ""; //ventas
+        String gastos = input_gasto.getText() != null ? input_gasto.getText() : "";
+        if (!ventas.isEmpty() && !gastos.isEmpty()) {
+            System.out.println(mes + "\n" + utiles.transformStringFloat(ventas) + "\n" + utiles.transformStringFloat(gastos));
+            
+            
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Llene todas las casillas", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }//gastos
+    }
+    
+    private void limpiar() {
+        input_venta.setText("");
+        input_gasto.setText("");
+        //lblpromedio.setText("0.0");
+        cargarTabla();
+        //fila = -1;
+        tblTablita.clearSelection();
+    }
+    
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        Informe informe = new Informe();
-        Utiles utiles = new Utiles();
+        
         //informe.agregarDato(evt);
-        
-        String mes = (String)box_months.getSelectedItem(); //mes
-        
-        String ventas = input_venta.getText() != null ? input_venta.getText() : ""; //ventas
-        String gastos = input_gasto.getText() != null ? input_gasto.getText() : ""; //gastos
-        if(!ventas.isEmpty() && !gastos.isEmpty()){
-            System.out.println(mes + "\n" + utiles.transformStringFloat(ventas)+ "\n"+ utiles.transformStringFloat(gastos));
-        }else{
-            JOptionPane.showMessageDialog(null, "Llene todas las casillas", "Error", JOptionPane.ERROR_MESSAGE);
+        if(verificar()){
+            informe.guardarDato(box_months.getSelectedIndex() + 1, input_venta.getText(), input_gasto.getText());
+            mTableInforme.actualizarDatos(informe.getData());
+            limpiar();
         }
+        
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void yearIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearIndexActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_yearIndexActionPerformed
 
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        informe.crear();
         crearArreglos();
     }//GEN-LAST:event_jButton2ActionPerformed
 

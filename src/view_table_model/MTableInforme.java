@@ -27,35 +27,35 @@ public class MTableInforme extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 13;
+        return informe.getData()[0].length; // Obtiene el número de columnas del arreglo
     }
     
     @Override
-    public Object getValueAt(int i, int i1) {
-        switch(i1){
-            case 0: return informe.getData()[i][0];
-            case 1: return informe.getData()[i][1];
-            case 2: return informe.getData()[i][2];
-            case 3: return informe.getData()[i][3];
-            case 4: return informe.getData()[i][4];
-            case 5: return informe.getData()[i][5];
-            case 6: return informe.getData()[i][6];
-            case 7: return informe.getData()[i][7];
-            case 8: return informe.getData()[i][8];
-            case 9: return informe.getData()[i][9];
-            case 10: return informe.getData()[i][10];
-            case 11: return informe.getData()[i][11];
-            case 12: return informe.getData()[i][12];
-            default: return null;
-        } 
+    public Object getValueAt(int row, int column) {
+        return informe.getData()[row][column];
     }
+    
     @Override
     public String getColumnName(int i) {
-        switch (i) {
-            case 0: return informe.getData()[0][0];
-            case 1: return informe.getData()[1][0];
-            case 2: return informe.getData()[2][0];
-            default: return null;
-        }
+        String[] columnNames = {
+            "MESES",
+            "ENERO",
+            "FEBRERO",
+            "MARZO",
+            "ABRIL",
+            "MAYO",
+            "JUNIO",
+            "JULIO",
+            "AGOSTO",
+            "SEPTIEMBRE",
+            "OCTUBRE",
+            "NOVIEMBRE",
+            "DICIEMBRE"
+        };
+        return columnNames[i];
+    }
+    public void actualizarDatos(String[][] nuevosDatos) {
+        informe.setData(nuevosDatos); // Actualiza los datos en el objeto informe
+        fireTableDataChanged();       // Notifica que todos los datos han cambiado
     }
 }
