@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import util.Utiles;
 import view.*;
 import view_table_model.MTableInforme;
 /**
@@ -10,7 +11,6 @@ import view_table_model.MTableInforme;
  * @author JAIMEUNL
  */
 public class Informe {
-    
     private String data[][];
     
     public String[][] getData(){
@@ -98,6 +98,36 @@ public class Informe {
         return true;
     }
     
+    public Float calc_ventas() {
+        Float total_ventas = 0.0f;
+        for (int j = 1; j < data[0].length; j++) { // Cambié 'data.length' por 'data[0].length'
+            if (data[0][j] != null) {
+                Float valor = Utiles.transformStringFloat(data[0][j]);
+                if (valor != null) {
+                    total_ventas += valor;
+                } else {
+                    System.err.println("Valor nulo en ventas para índice " + j);
+                }
+            }
+        }
+        return total_ventas;
+    }
+
+    public Float calc_gastos() {
+        Float total_gastos = 0.0f;
+        for (int j = 1; j < data[1].length; j++) { // Cambié 'data.length' por 'data[1].length'
+            if (data[1][j] != null) {
+                Float valor = Utiles.transformStringFloat(data[1][j]);
+                if (valor != null) {
+                    total_gastos += valor;
+                } else {
+                    System.err.println("Valor nulo en gastos para índice " + j);
+                }
+            }
+        }
+        return total_gastos;
+    }
+
     
     /*public static void main(String[] args){
         Informe informe = new Informe();

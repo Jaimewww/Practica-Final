@@ -40,6 +40,7 @@ public class main_Frame extends javax.swing.JFrame {
             input_gasto.setEnabled(true);
             box_months.setEnabled(true);
             cargarTabla();
+            generar_datos.setEnabled(true);
         }
     }
     
@@ -67,6 +68,11 @@ public class main_Frame extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         yearIndex = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        txt_totalventas = new javax.swing.JLabel();
+        txt_totalgastos = new javax.swing.JLabel();
+        lbl_ventas = new javax.swing.JLabel();
+        lbl_gastos = new javax.swing.JLabel();
+        generar_datos = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTablita = new javax.swing.JTable();
 
@@ -124,6 +130,22 @@ public class main_Frame extends javax.swing.JFrame {
             }
         });
 
+        txt_totalventas.setText("Total de ventas");
+
+        txt_totalgastos.setText("Total de gastos");
+
+        lbl_ventas.setText("0.0");
+
+        lbl_gastos.setText("0.0");
+
+        generar_datos.setText("Generar datos");
+        generar_datos.setEnabled(false);
+        generar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generar_datosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,21 +163,44 @@ public class main_Frame extends javax.swing.JFrame {
                         .addComponent(input_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAgregar))
-                    .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(592, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(128, 128, 128)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(generar_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_totalventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_totalgastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_gastos, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                    .addComponent(lbl_ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(365, 365, 365))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(yearIndex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_totalventas)
+                            .addComponent(lbl_ventas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_totalgastos)
+                            .addComponent(lbl_gastos))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(input_venta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(generar_datos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(input_gasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +208,7 @@ public class main_Frame extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, -1, -1));
+        background.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 970, -1));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -184,7 +229,7 @@ public class main_Frame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,6 +297,12 @@ public class main_Frame extends javax.swing.JFrame {
         crearArreglos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void generar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generar_datosActionPerformed
+        // TODO add your handling code here:
+        lbl_ventas.setText(String.valueOf(informe.calc_ventas()));
+        lbl_gastos.setText(String.valueOf(informe.calc_gastos()));
+    }//GEN-LAST:event_generar_datosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,13 +342,18 @@ public class main_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JComboBox<String> box_months;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JToggleButton generar_datos;
     private javax.swing.JTextField input_gasto;
     private javax.swing.JTextField input_venta;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_gastos;
+    private javax.swing.JLabel lbl_ventas;
     private javax.swing.JTable tblTablita;
+    private javax.swing.JLabel txt_totalgastos;
+    private javax.swing.JLabel txt_totalventas;
     private javax.swing.JTextField yearIndex;
     // End of variables declaration//GEN-END:variables
 }
