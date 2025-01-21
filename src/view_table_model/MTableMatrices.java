@@ -23,21 +23,33 @@ public class MTableMatrices extends AbstractTableModel {
     
     @Override
     public int getRowCount() {
-        return matrices.getData().length;
+        if(matrices.getData() == null){
+            return 0;
+        }else{
+            return matrices.getData().length;
+        }
     }
     
     @Override
     public int getColumnCount() {
-        return matrices.getData()[0].length;
+        if (matrices.getData() == null) {
+            return 0;
+        } else {
+            return matrices.getData()[0].length;
+        }   
     }
 
     @Override
     public Object getValueAt(int i, int j) {
-        Float[][] data = matrices.getData();
-        if (i < 0 || i >= data.length || j < 0 || j >= data[0].length) {
+        if (matrices.getData() == null) {
             return null;
+        } else {
+            Float[][] data = matrices.getData();
+            if (i < 0 || i >= data.length || j < 0 || j >= data[0].length) {
+                return null;
+            }
+            return data[i][j];
         }
-        return data[i][j];
     }
     
     

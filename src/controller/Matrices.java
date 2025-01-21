@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class Matrices {
     private Float data[][];
-    
     public Float[][] getData(){
         return this.data;
     }
@@ -33,9 +32,9 @@ public class Matrices {
         }
     }
     
-    public Boolean generateFile(){
+    public Boolean generateFile(Float data[][], String direc){
         if(data != null){
-            String pathNotas = "files" + File.separatorChar + "matrices"+ File.separatorChar + "matriz.txt";
+            String pathNotas = "files" + File.separatorChar + direc + File.separatorChar + "matriz.txt";
             try{
                 FileWriter file_matriz = new FileWriter(pathNotas);
                 for (int i = 0; i < data.length; i++) {
@@ -56,40 +55,35 @@ public class Matrices {
         }
         return false;
     }
-    public Boolean cargarArchivo() {
-        String pathNotas = "files" + File.separatorChar + "matrices" + File.separatorChar + "matriz.txt";
+    public Boolean cargarArchivo(String direc) {
+        String pathNotas = "files" + File.separatorChar + direc + File.separatorChar + "matriz.txt";
 
         try {
-            // Leer todas las líneas del archivo
             List<String> lines = Files.readAllLines(Paths.get(pathNotas));
 
             if (lines.isEmpty()) {
-                System.out.println("El archivo está vacío.");
+                //System.out.println("archivo vacio");
                 return false;
             }
 
-            // Determinar las dimensiones de la matriz
             int n = lines.size();
-            int m = lines.get(0).split("\t").length; // Número de columnas basado en la primera línea
+            int m = lines.get(0).split("\t").length;
 
-            // Crear la matriz con las dimensiones adecuadas
             crear(n, m);
 
-            // Rellenar la matriz con los datos
             int fila = 0;
             for (String linea : lines) {
                 String[] aux = linea.split("\t");
                 for (int col = 0; col < m; col++) {
-                    // Validar y asignar valores
                     if (col < aux.length) {
                         try {
                             data[fila][col] = Float.parseFloat(aux[col]);
                         } catch (NumberFormatException e) {
-                            System.out.println("Error al convertir el valor: " + aux[col]);
-                            data[fila][col] = 0.0f; // Valor predeterminado en caso de error
+                            //System.out.println("Error al convertir: " + aux[col]);
+                            data[fila][col] = 0.0f;
                         }
                     } else {
-                        data[fila][col] = 0.0f; // Completar con ceros si faltan valores
+                        data[fila][col] = 0.0f;
                     }
                 }
                 fila++;
@@ -98,11 +92,13 @@ public class Matrices {
             return true;
 
         } catch (Exception e) {
-            System.out.println("Error al cargar el archivo: " + e.getMessage());
+            //System.out.println("error al cargar:  " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
+    
+    
 
     
     

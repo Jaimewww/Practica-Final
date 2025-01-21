@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-import controller.Matrices;
+import controller.*;
 import javax.swing.JOptionPane;
-import view_table_model.MTableMatrices;
+import view_table_model.*;
 import util.Utiles;
 /**
  *
@@ -14,11 +14,23 @@ import util.Utiles;
 public class Frm_Matrices extends javax.swing.JFrame {
     Matrices matrices = new Matrices();
     MTableMatrices mTableMatrices = new MTableMatrices();
+    MTableMatrizResult mTableMatrizResult = new MTableMatrizResult();
+    Matriz_result matriz_result = new Matriz_result();
+    private final String direc = "matrices";
     /**
      * Creates new form Frm_Matrices
      */
     public Frm_Matrices() {
         initComponents();
+    }
+    
+    public void duplicar(){
+        matriz_result.duplicarMatriz(matrices.getData());
+        mTableMatrizResult.setMatrices(matriz_result);
+        tbl_result.setModel(mTableMatrizResult);
+        tbl_result.revalidate();
+        tbl_result.repaint();
+        
     }
     
     public void cargarMatriz() {
@@ -45,6 +57,9 @@ public class Frm_Matrices extends javax.swing.JFrame {
         btn_generar = new javax.swing.JButton();
         btn_guardarArch = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_result = new javax.swing.JTable();
+        operacion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +120,29 @@ public class Frm_Matrices extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 120, -1));
 
+        tbl_result.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tbl_result);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 410, 300));
+
+        operacion.setText("Operacion");
+        operacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(operacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,16 +167,20 @@ public class Frm_Matrices extends javax.swing.JFrame {
 
     private void btn_generarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generarActionPerformed
         // TODO add your handling code here:
-        String filas = txt_filas.getText();
-        String columnas = txt_column.getText();
+        String filas = (txt_filas.getText() == null || txt_filas.getText().isEmpty()) ? " " : txt_filas.getText();
+        String columnas = (txt_column.getText() == null || txt_column.getText().isEmpty()) ? " " : txt_column.getText();
+        
         if(Utiles.validateInt(filas) && Utiles.validateInt(columnas)){
-            if(Utiles.transformStringInt(txt_filas.getText()) <= 6 && Utiles.transformStringInt(columnas) <= 6){
-                matrices.crear(Utiles.transformStringInt(filas), Utiles.transformStringInt(columnas));
-                cargarMatriz();
+            if(filas == null || columnas == null){
+                JOptionPane.showMessageDialog(null, "Ingrese dos dimensiones enteras", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(null, "Dimensiones maximas 6x6", "Error", JOptionPane.ERROR_MESSAGE);
+                if (Utiles.transformStringInt(txt_filas.getText()) <= 6 && Utiles.transformStringInt(columnas) <= 6) {
+                    matrices.crear(Utiles.transformStringInt(filas), Utiles.transformStringInt(columnas));
+                    cargarMatriz();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Dimensiones maximas 6x6", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            
         }else{
             JOptionPane.showMessageDialog(null, "Ingrese dos dimensiones enteras", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -146,20 +188,25 @@ public class Frm_Matrices extends javax.swing.JFrame {
 
     private void btn_guardarArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarArchActionPerformed
         // TODO add your handling code here:
-        matrices.generateFile();
+        matrices.generateFile(matrices.getData(), direc);
     }//GEN-LAST:event_btn_guardarArchActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
         
-        if (matrices.cargarArchivo()) {
+        if (matrices.cargarArchivo(direc)) {
             cargarMatriz();
             //lblpromedio.setText(e_Notas.promedio().toString());
             //btnagregar.setEnabled(true);
             //btn_guardar_archivo.setEnabled(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void operacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacionActionPerformed
+        // TODO add your handling code here:
+        duplicar();
+    }//GEN-LAST:event_operacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,7 +249,10 @@ public class Frm_Matrices extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton operacion;
     private javax.swing.JTable tbl_matriz_init;
+    private javax.swing.JTable tbl_result;
     private javax.swing.JTextField txt_column;
     private javax.swing.JTextField txt_filas;
     // End of variables declaration//GEN-END:variables
