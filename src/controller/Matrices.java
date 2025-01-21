@@ -1,0 +1,114 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package controller;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
+/**
+ *
+ * @author JAIMEUNL
+ */
+public class Matrices {
+    private Float data[][];
+    
+    public Float[][] getData(){
+        return this.data;
+    }
+    
+    public void setData(Float[][] data){
+        this.data = data;
+    }
+    
+    public void crear(int n, int m){
+        this.data = new Float[n][m];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                this.data[i][j] = 0.0f;
+            }
+        }
+    }
+    
+    public Boolean generateFile(){
+        if(data != null){
+            String pathNotas = "files" + File.separatorChar + "matrices"+ File.separatorChar + "matriz.txt";
+            try{
+                FileWriter file_matriz = new FileWriter(pathNotas);
+                for (int i = 0; i < data.length; i++) {
+                    String datos = "";
+                    for (int j = 0; j < data[0].length; j++) {
+                        datos += data[i][j] + "\t";
+                    }
+
+                    file_matriz.write(datos + "\n");
+                    file_matriz.flush();
+                }
+
+                file_matriz.close();
+                return true;
+            }catch(Exception e){
+                return false;
+            }
+        }
+        return false;
+    }
+    public Boolean cargarArchivo() {
+        String pathNotas = "files" + File.separatorChar + "matrices" + File.separatorChar + "matriz.txt";
+
+        try {
+            // Leer todas las líneas del archivo
+            List<String> lines = Files.readAllLines(Paths.get(pathNotas));
+
+            if (lines.isEmpty()) {
+                System.out.println("El archivo está vacío.");
+                return false;
+            }
+
+            // Determinar las dimensiones de la matriz
+            int n = lines.size();
+            int m = lines.get(0).split("\t").length; // Número de columnas basado en la primera línea
+
+            // Crear la matriz con las dimensiones adecuadas
+            crear(n, m);
+
+            // Rellenar la matriz con los datos
+            int fila = 0;
+            for (String linea : lines) {
+                String[] aux = linea.split("\t");
+                for (int col = 0; col < m; col++) {
+                    // Validar y asignar valores
+                    if (col < aux.length) {
+                        try {
+                            data[fila][col] = Float.parseFloat(aux[col]);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error al convertir el valor: " + aux[col]);
+                            data[fila][col] = 0.0f; // Valor predeterminado en caso de error
+                        }
+                    } else {
+                        data[fila][col] = 0.0f; // Completar con ceros si faltan valores
+                    }
+                }
+                fila++;
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar el archivo: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
+    
+    /*public static void main(String[] args){
+        Matrices matrices = new Matrices();
+        matrices.crear(6, 6);
+        Informe.print_matriz(matrices.getData());
+    }*/
+}

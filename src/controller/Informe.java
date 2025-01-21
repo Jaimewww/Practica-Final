@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import java.io.File;
+import java.io.FileWriter;
 import util.Utiles;
 /**
  *
@@ -155,6 +157,29 @@ public class Informe {
             }
         }
         return total_gastos;
+    }
+    public Boolean generateFile() {
+        if (data != null) {
+            String pathNotas = "files" + File.separatorChar + "informes" + File.separatorChar + "informe.txt";
+            try {
+                FileWriter file_matriz = new FileWriter(pathNotas);
+                for (int i = 0; i < data.length; i++) {
+                    String datos = "";
+                    for (int j = 0; j < data[0].length; j++) {
+                        datos += data[i][j] + "\t";
+                    }
+
+                    file_matriz.write(datos + "\n");
+                    file_matriz.flush();
+                }
+
+                file_matriz.close();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     
