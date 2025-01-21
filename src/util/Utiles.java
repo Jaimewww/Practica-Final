@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author CAEL
+ * @author JAIMEUNL
  */
 public class Utiles {
     public static boolean validate(String num) {
