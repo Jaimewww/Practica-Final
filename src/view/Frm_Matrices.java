@@ -17,6 +17,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
     MTableMatrizResult mTableMatrizResult = new MTableMatrizResult();
     Matriz_result matriz_result = new Matriz_result();
     private final String direc = "matrices";
+    private final String direc_result = "m_operacion";
     /**
      * Creates new form Frm_Matrices
      */
@@ -59,7 +60,11 @@ public class Frm_Matrices extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_result = new javax.swing.JTable();
-        operacion = new javax.swing.JButton();
+        btn_deletePrim = new javax.swing.JButton();
+        btn_saveResult = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btn_deletMult = new javax.swing.JButton();
+        fld_mult = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,7 +115,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
                 btn_guardarArchActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_guardarArch, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, -1, -1));
+        jPanel1.add(btn_guardarArch, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, -1, -1));
 
         jButton1.setText("Cargar archivo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +123,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 120, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 120, -1));
 
         tbl_result.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,13 +140,41 @@ public class Frm_Matrices extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 410, 300));
 
-        operacion.setText("Operacion");
-        operacion.addActionListener(new java.awt.event.ActionListener() {
+        btn_deletePrim.setText("Eliminar Primos");
+        btn_deletePrim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                operacionActionPerformed(evt);
+                btn_deletePrimActionPerformed(evt);
             }
         });
-        jPanel1.add(operacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
+        jPanel1.add(btn_deletePrim, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, 30));
+
+        btn_saveResult.setText("Guardar resultado");
+        btn_saveResult.setEnabled(false);
+        btn_saveResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveResultActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_saveResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 310, -1, -1));
+
+        jLabel1.setText("Operaciones");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        btn_deletMult.setText("Eliminar multiplo");
+        btn_deletMult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deletMultActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_deletMult, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 130, -1));
+
+        fld_mult.setBorder(javax.swing.BorderFactory.createTitledBorder("Multiplo"));
+        fld_mult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fld_multActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fld_mult, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,7 +184,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
         );
 
         pack();
@@ -203,10 +236,41 @@ public class Frm_Matrices extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void operacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacionActionPerformed
+    private void btn_deletePrimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deletePrimActionPerformed
         // TODO add your handling code here:
         duplicar();
-    }//GEN-LAST:event_operacionActionPerformed
+        matrices.deletePrim(matriz_result.getData());
+        mTableMatrizResult.setMatrices(matriz_result);
+        tbl_result.setModel(mTableMatrizResult);
+        tbl_result.revalidate();
+        tbl_result.repaint();
+        btn_saveResult.setEnabled(true);
+    }//GEN-LAST:event_btn_deletePrimActionPerformed
+
+    private void btn_deletMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deletMultActionPerformed
+        // TODO add your handling code here:
+        if( !(fld_mult.getText().isEmpty()) && Utiles.validateInt(fld_mult.getText()) ){
+            int multiplo = Utiles.transformStringInt(fld_mult.getText());
+            duplicar();
+            matrices.deleteMult(matriz_result.getData(), multiplo);
+            mTableMatrizResult.setMatrices(matriz_result);
+            tbl_result.setModel(mTableMatrizResult);
+            tbl_result.revalidate();
+            tbl_result.repaint();
+            btn_saveResult.setEnabled(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingrese un numero entero", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_deletMultActionPerformed
+
+    private void btn_saveResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveResultActionPerformed
+        // TODO add your handling code here:
+        matrices.generateFile(matriz_result.getData(), direc_result);
+    }//GEN-LAST:event_btn_saveResultActionPerformed
+
+    private void fld_multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fld_multActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fld_multActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,13 +308,17 @@ public class Frm_Matrices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_deletMult;
+    private javax.swing.JButton btn_deletePrim;
     private javax.swing.JButton btn_generar;
     private javax.swing.JButton btn_guardarArch;
+    private javax.swing.JButton btn_saveResult;
+    private javax.swing.JTextField fld_mult;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton operacion;
     private javax.swing.JTable tbl_matriz_init;
     private javax.swing.JTable tbl_result;
     private javax.swing.JTextField txt_column;

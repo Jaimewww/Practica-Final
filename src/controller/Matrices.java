@@ -98,6 +98,44 @@ public class Matrices {
         }
     }
     
+    public void deleteMult(Float[][] m, float mult){
+        for(int i = 0; i < m.length; i++){
+            for(int j = 0; j < m[0].length; j++){
+                if(m[i][j] % mult == 0){
+                    m[i][j] = 0.0f;
+                }
+            }
+        }
+    }
+    
+    public void deletePrim(Float[][] m) {
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                if (es_Primo(m[i][j])) {
+                    m[i][j] = 0.0f;
+                }
+            }
+        }
+    }
+
+    private boolean es_Primo(Float num) {
+        
+        if(num <= 1 || num != Math.floor(num)) return false;
+        
+        int n = num.intValue();
+        
+        if (n == 2 || n == 3) return true;
+        
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     
 
     

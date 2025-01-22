@@ -19,6 +19,7 @@ public class Frm_Informe extends javax.swing.JFrame {
     private Informe informe = new Informe();
     private MTableInforme mTableInforme = new MTableInforme();
     private Utiles utiles = new Utiles();
+    private final String direc = "informes";
     
     private void cargarTabla(){
         mTableInforme.setInforme(informe);
@@ -32,7 +33,7 @@ public class Frm_Informe extends javax.swing.JFrame {
         
         if(year.isEmpty()|| year == null || util.validateInt(year) == false || year.length() > 4 || year.length() < 4){
             JOptionPane.showMessageDialog(null, "Ingrese un valor entero de 4 digitos", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("ERROR");
+            System.out.println("ERRO");
         }else{
             informe.crear();
             btnAgregar.setEnabled(true);
@@ -41,6 +42,8 @@ public class Frm_Informe extends javax.swing.JFrame {
             box_months.setEnabled(true);
             cargarTabla();
             generar_datos.setEnabled(true);
+            btn_guardar.setEnabled(true);
+            btn_cargar.setEnabled(true);
         }
     }
     
@@ -75,7 +78,7 @@ public class Frm_Informe extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lbl_gasto_menor = new javax.swing.JLabel();
         box_months = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
         btn_cargar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -166,16 +169,18 @@ public class Frm_Informe extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jButton1.setText("Guardar Archivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_guardar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btn_guardar.setText("Guardar Archivo");
+        btn_guardar.setEnabled(false);
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_guardarActionPerformed(evt);
             }
         });
 
         btn_cargar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btn_cargar.setText("Cargar Archivo");
+        btn_cargar.setEnabled(false);
         btn_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cargarActionPerformed(evt);
@@ -212,7 +217,7 @@ public class Frm_Informe extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(229, 229, 229)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(265, 265, 265))
@@ -238,7 +243,7 @@ public class Frm_Informe extends javax.swing.JFrame {
                     .addComponent(box_months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(btn_guardar)
                             .addComponent(btn_cargar)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -475,12 +480,15 @@ public class Frm_Informe extends javax.swing.JFrame {
 
     private void btn_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarActionPerformed
         // TODO add your handling code here:
+        if(informe.cargarArchivo(direc)){
+            cargarTabla();
+        }
     }//GEN-LAST:event_btn_cargarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         // TODO add your handling code here:
         informe.generateFile();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,10 +531,10 @@ public class Frm_Informe extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> box_months;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btn_cargar;
+    private javax.swing.JButton btn_guardar;
     private javax.swing.JToggleButton generar_datos;
     private javax.swing.JTextField input_gasto;
     private javax.swing.JTextField input_venta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

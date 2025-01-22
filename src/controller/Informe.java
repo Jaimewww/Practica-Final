@@ -5,6 +5,9 @@
 package controller;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import util.Utiles;
 /**
  *
@@ -158,6 +161,50 @@ public class Informe {
         }
         return total_gastos;
     }
+    
+    public Boolean cargarArchivo(String direc) {
+        String pathNotas = "files" + File.separatorChar + direc + File.separatorChar + "informe.txt";
+
+        try {
+            // Leer todas las líneas del archivo
+            List<String> lines = Files.readAllLines(Paths.get(pathNotas));
+
+            // Verificar si el archivo está vacío
+            if (lines.isEmpty()) {
+                System.out.println("El archivo está vacío.");
+                return false;
+            }
+
+            // Determinar las dimensiones de la matriz
+            int n = lines.size(); // Número de filas
+            int m = lines.get(0).split("\t").length; // Número de columnas basado en la primera línea
+
+            // Crear la matriz con las dimensiones dinámicas
+            crear();
+
+            // Llenar la matriz con los datos del archivo
+            for (int fila = 0; fila < n; fila++) {
+                String[] aux = lines.get(fila).split("\t");
+                for (int col = 0; col < m; col++) {
+                    try {
+                        data[fila][col] = aux[col]; // Asignar el valor leído
+                    } catch (Exception e) {
+                        System.out.println("Error al procesar el dato en fila " + fila + ", columna " + col);
+                        data[fila][col] = " "; // Asignar valor por defecto en caso de error
+                    }
+                }
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar el archivo: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
     public Boolean generateFile() {
         if (data != null) {
             String pathNotas = "files" + File.separatorChar + "informes" + File.separatorChar + "informe.txt";
