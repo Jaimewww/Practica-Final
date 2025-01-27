@@ -228,7 +228,6 @@ public class Informe {
         }
         return false;
     }
-
     
     /*public static void main(String[] args){
         Informe informe = new Informe();
