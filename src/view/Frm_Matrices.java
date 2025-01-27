@@ -57,7 +57,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
         txt_column = new javax.swing.JTextField();
         btn_generar = new javax.swing.JButton();
         btn_guardarArch = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_cargar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_result = new javax.swing.JTable();
         btn_deletePrim = new javax.swing.JButton();
@@ -65,6 +65,11 @@ public class Frm_Matrices extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btn_deletMult = new javax.swing.JButton();
         fld_mult = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txta_ayuda = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +88,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_matriz_init);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 400, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 400, 300));
 
         txt_filas.setBorder(javax.swing.BorderFactory.createTitledBorder("Filas(n)"));
         txt_filas.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +96,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
                 txt_filasActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_filas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 100, -1));
+        jPanel1.add(txt_filas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 100, -1));
 
         txt_column.setBorder(javax.swing.BorderFactory.createTitledBorder("Columnas(m)"));
         txt_column.addActionListener(new java.awt.event.ActionListener() {
@@ -99,31 +104,37 @@ public class Frm_Matrices extends javax.swing.JFrame {
                 txt_columnActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_column, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 100, -1));
+        jPanel1.add(txt_column, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 100, -1));
 
+        btn_generar.setBackground(new java.awt.Color(102, 102, 255));
+        btn_generar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btn_generar.setText("Generar");
         btn_generar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_generarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 100, -1));
+        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 100, -1));
 
-        btn_guardarArch.setText("Guardar archivo");
+        btn_guardarArch.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btn_guardarArch.setText("Guardar formato de Matriz");
+        btn_guardarArch.setEnabled(false);
         btn_guardarArch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarArchActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_guardarArch, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, -1, -1));
+        jPanel1.add(btn_guardarArch, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
 
-        jButton1.setText("Cargar archivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_cargar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btn_cargar.setText("Cargar Matriz");
+        btn_cargar.setEnabled(false);
+        btn_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_cargarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 120, -1));
+        jPanel1.add(btn_cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, 130, -1));
 
         tbl_result.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,16 +149,20 @@ public class Frm_Matrices extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tbl_result);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 410, 300));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 410, 300));
 
+        btn_deletePrim.setBackground(new java.awt.Color(255, 204, 204));
+        btn_deletePrim.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btn_deletePrim.setText("Eliminar Primos");
+        btn_deletePrim.setEnabled(false);
         btn_deletePrim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deletePrimActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_deletePrim, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, 30));
+        jPanel1.add(btn_deletePrim, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, 270, 30));
 
+        btn_saveResult.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
         btn_saveResult.setText("Guardar resultado");
         btn_saveResult.setEnabled(false);
         btn_saveResult.addActionListener(new java.awt.event.ActionListener() {
@@ -155,36 +170,62 @@ public class Frm_Matrices extends javax.swing.JFrame {
                 btn_saveResultActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_saveResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 310, -1, -1));
+        jPanel1.add(btn_saveResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 410, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Verdana", 3, 18)); // NOI18N
         jLabel1.setText("Operaciones");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, -1, -1));
 
-        btn_deletMult.setText("Eliminar multiplo");
+        btn_deletMult.setBackground(new java.awt.Color(204, 255, 204));
+        btn_deletMult.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btn_deletMult.setText("Eliminar múltiplo");
+        btn_deletMult.setEnabled(false);
         btn_deletMult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deletMultActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_deletMult, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 130, -1));
+        jPanel1.add(btn_deletMult, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 520, 150, -1));
 
-        fld_mult.setBorder(javax.swing.BorderFactory.createTitledBorder("Multiplo"));
+        fld_mult.setBackground(new java.awt.Color(204, 255, 204));
+        fld_mult.setBorder(javax.swing.BorderFactory.createTitledBorder("Múltiplo"));
         fld_mult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fld_multActionPerformed(evt);
             }
         });
-        jPanel1.add(fld_mult, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 100, -1));
+        jPanel1.add(fld_mult, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 520, 110, -1));
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        jLabel2.setText("MATRICES");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+
+        txta_ayuda.setEditable(false);
+        txta_ayuda.setColumns(20);
+        txta_ayuda.setFont(new java.awt.Font("Monospaced", 3, 14)); // NOI18N
+        txta_ayuda.setRows(5);
+        txta_ayuda.setText("SITIO DE AYUDA");
+        jScrollPane3.setViewportView(txta_ayuda);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 850, 90));
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel3.setText("MATRIZ ENTRADA");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 170, 20));
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel4.setText("MATRIZ SALIDA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 130, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
 
         pack();
@@ -210,6 +251,8 @@ public class Frm_Matrices extends javax.swing.JFrame {
                 if (Utiles.transformStringInt(txt_filas.getText()) <= 15 && Utiles.transformStringInt(columnas) <= 15) {
                     matrices.crear(Utiles.transformStringInt(filas), Utiles.transformStringInt(columnas));
                     cargarMatriz();
+                    txta_ayuda.setText("Haz generado una matriz correctamente, ahora guárdala en tus archivos internos de NetBeans, para ello, da click en: Guardar formato matriz ");
+                    btn_guardarArch.setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Dimensiones maximas 6x6", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -222,19 +265,21 @@ public class Frm_Matrices extends javax.swing.JFrame {
     private void btn_guardarArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarArchActionPerformed
         // TODO add your handling code here:
         matrices.generateFile(matrices.getData(), direc);
+        btn_cargar.setEnabled(true);
+        txta_ayuda.setText("Haz guardado tu matriz exitosamente, ahora es editable dentro de tus archivos de NetBeans, para ello dirigete a: (NetBeansProjects\\Practica-Final\\files\\matrices) y edítala a tu gusto. Una vez acabes, da click al botón Cargar Matriz \n\nNOTA IMPORTANTE: No olvides de guardar tu archivo txt cuando lo edites, caso contrario no se cargaran los cambios del archivo txt en el programa");
     }//GEN-LAST:event_btn_guardarArchActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarActionPerformed
         // TODO add your handling code here:
-        
-        
         if (matrices.cargarArchivo(direc)) {
             cargarMatriz();
+            txta_ayuda.setText("Haz cargado correctamente tu matriz, ahora puedes eliminar sus números primos dando click en: Eliminar primos \no también puedes eliminar los múltiplos seleccionando la opción: Eliminar múltiplo");
             //lblpromedio.setText(e_Notas.promedio().toString());
-            //btnagregar.setEnabled(true);
+            btn_deletMult.setEnabled(true);
+            btn_deletePrim.setEnabled(true);
             //btn_guardar_archivo.setEnabled(true);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_cargarActionPerformed
 
     private void btn_deletePrimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deletePrimActionPerformed
         // TODO add your handling code here:
@@ -245,6 +290,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
         tbl_result.revalidate();
         tbl_result.repaint();
         btn_saveResult.setEnabled(true);
+        txta_ayuda.setText("Haz eliminado los números primos de tu matriz principal correctamente, la matriz de salida mostrará los resultados obtenidos. \nSi deseas guardar tus resultados, da click en el botón: Guardar resultado");
     }//GEN-LAST:event_btn_deletePrimActionPerformed
 
     private void btn_deletMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deletMultActionPerformed
@@ -258,6 +304,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
             tbl_result.revalidate();
             tbl_result.repaint();
             btn_saveResult.setEnabled(true);
+            txta_ayuda.setText("Haz eliminado los múltiplos de tu matriz de entrada correctamente, la matriz de salida mostrará los resultados obtenidos. \nSi deseas guardar tus resultados, da click en el botón: Guardar resultado");
         }else{
             JOptionPane.showMessageDialog(null, "Ingrese un numero entero", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -266,6 +313,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
     private void btn_saveResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveResultActionPerformed
         // TODO add your handling code here:
         matrices.generateFile(matriz_result.getData(), direc_result);
+        txta_ayuda.setText("Se ha guardado su matriz de salida correctamete, ahora puede encontrarla en la siguiente ruta: (NetBeansProjects\\Practica-Final\\files\\m_operacion)");
     }//GEN-LAST:event_btn_saveResultActionPerformed
 
     private void fld_multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fld_multActionPerformed
@@ -308,20 +356,25 @@ public class Frm_Matrices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cargar;
     private javax.swing.JButton btn_deletMult;
     private javax.swing.JButton btn_deletePrim;
     private javax.swing.JButton btn_generar;
     private javax.swing.JButton btn_guardarArch;
     private javax.swing.JButton btn_saveResult;
     private javax.swing.JTextField fld_mult;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tbl_matriz_init;
     private javax.swing.JTable tbl_result;
     private javax.swing.JTextField txt_column;
     private javax.swing.JTextField txt_filas;
+    private javax.swing.JTextArea txta_ayuda;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,9 +10,9 @@ package controller;
  */
 public class ControllerCasa {
     public String[][] tabla = new String[10][4];
-    public String[][] tablita(){
+    /*public String[][] tablita(){
         for(int i = 0; i <= 10; i++){
             
         }
-    }
+    }*/
 }
