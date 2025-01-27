@@ -207,7 +207,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
             if(filas == null || columnas == null){
                 JOptionPane.showMessageDialog(null, "Ingrese dos dimensiones enteras", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
-                if (Utiles.transformStringInt(txt_filas.getText()) <= 6 && Utiles.transformStringInt(columnas) <= 6) {
+                if (Utiles.transformStringInt(txt_filas.getText()) <= 15 && Utiles.transformStringInt(columnas) <= 15) {
                     matrices.crear(Utiles.transformStringInt(filas), Utiles.transformStringInt(columnas));
                     cargarMatriz();
                 } else {
