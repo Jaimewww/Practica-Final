@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import util.Utiles;
+import controller.Casas.*;
 /**
  *
  * @author JAIMEUNL
@@ -105,12 +106,12 @@ public class Informe {
     }
 
     
-    public static void print_matriz(Object[] m) {
+    public static void print_matriz(Object[][] m) {
         for (int i = 0; i < m.length; i++) {
-            //for (int j = 0; j < m[0].length; j++) {
-            System.out.print((m[i] != null ? m[i] : "") + "\t");
-            //}
-            //System.out.println();
+            for (int j = 0; j < m[0].length; j++) {
+            System.out.print((m[i][j] != null ? m[i][j] : "") + "\t");
+            }
+            System.out.println();
         }
         System.out.println();
     }
@@ -166,23 +167,18 @@ public class Informe {
         String pathNotas = "files" + File.separatorChar + direc + File.separatorChar + "informe.txt";
 
         try {
-            // Leer todas las líneas del archivo
             List<String> lines = Files.readAllLines(Paths.get(pathNotas));
 
-            // Verificar si el archivo está vacío
             if (lines.isEmpty()) {
                 System.out.println("El archivo está vacío.");
                 return false;
             }
-
-            // Determinar las dimensiones de la matriz
-            int n = lines.size(); // Número de filas
-            int m = lines.get(0).split("\t").length; // Número de columnas basado en la primera línea
-
-            // Crear la matriz con las dimensiones dinámicas
+            
+            int n = lines.size(); //filas
+            int m = lines.get(0).split("\t").length;//columnas
+            
             crear();
 
-            // Llenar la matriz con los datos del archivo
             for (int fila = 0; fila < n; fila++) {
                 String[] aux = lines.get(fila).split("\t");
                 for (int col = 0; col < m; col++) {
@@ -190,7 +186,7 @@ public class Informe {
                         data[fila][col] = aux[col]; // Asignar el valor leído
                     } catch (Exception e) {
                         System.out.println("Error al procesar el dato en fila " + fila + ", columna " + col);
-                        data[fila][col] = " "; // Asignar valor por defecto en caso de error
+                        data[fila][col] = " ";
                     }
                 }
             }
@@ -229,9 +225,9 @@ public class Informe {
         return false;
     }
     
-    /*public static void main(String[] args){
-        Informe informe = new Informe();
-        informe.crear();
-        print_matriz(informe.getData());
-    }*/
+    public static void main(String[] args){
+        Casas controllerCasa = new Casas();
+        controllerCasa.crear();
+        print_matriz(controllerCasa.getData());
+    }
 }

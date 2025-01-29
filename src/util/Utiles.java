@@ -77,7 +77,7 @@ public class Utiles {
         return resp;
     }
 
-    public static int generaNumeroRango(int minimo, int maximo) {
+    public static int randomInt(int minimo, int maximo) {
         Random random = new Random();
         //2 - 10
         //2 + 11 - 2   -----  2 + (9) 

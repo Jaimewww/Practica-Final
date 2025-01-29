@@ -28,10 +28,9 @@ public class Frm_Informe extends javax.swing.JFrame {
     }
     
     private void crearArreglos(){
-        Utiles util = new Utiles();
         String year = yearIndex.getText();
         
-        if(year.isEmpty()|| year == null || util.validateInt(year) == false || year.length() > 4 || year.length() < 4){
+        if(year.isEmpty()|| year == null || Utiles.validateInt(year) == false || year.length() > 4 || year.length() < 4){
             JOptionPane.showMessageDialog(null, "Ingrese un valor entero de 4 digitos", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("ERRO");
         }else{
@@ -451,7 +450,7 @@ public class Frm_Informe extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        informe.crear();
+        //informe.crear();
         crearArreglos();
     }//GEN-LAST:event_jButton2ActionPerformed
 

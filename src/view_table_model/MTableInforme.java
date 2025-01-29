@@ -27,7 +27,7 @@ public class MTableInforme extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return informe.getData()[0].length; // Obtiene el número de columnas del arreglo
+        return informe.getData()[0].length;
     }
     
     @Override
@@ -54,8 +54,9 @@ public class MTableInforme extends AbstractTableModel {
         };
         return columnNames[i];
     }
+    
     public void actualizarDatos(String[][] nuevosDatos) {
-        informe.setData(nuevosDatos); // Actualiza los datos en el objeto informe
-        fireTableDataChanged();       // Notifica que todos los datos han cambiado
+        informe.setData(nuevosDatos); // Actualiza los datos de informe
+        fireTableDataChanged();
     }
 }

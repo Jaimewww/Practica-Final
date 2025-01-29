@@ -1,2 +1,2 @@
-Ventas	33	349	238	7700	45	482	456	5345	3432	354	354	6765	
-Gastos	100	348	22	222	12	43	232	23	345	323	32	56	
+Ventas	null	null	null	null	null	null	null	null	null	null	null	null	
+Gastos	null	null	null	null	null	null	null	null	null	null	null	null	
