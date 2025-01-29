@@ -8,7 +8,7 @@ import util.*;
 
 /**
  *
- * @author JAIMEUNL
+ * @author CAEL
  */
 public class Casas {
 
@@ -48,7 +48,7 @@ public class Casas {
             for (int j = i + 1; j < data.length; j++) {
                 if (data[i][1].equals(data[j][1]) && data[i][2].equals(data[j][2]) && data[i][3].equals(data[j][3])) {
                     if (!data[i][0].equals(data[j][0])) {
-                        homonimas[cont] = "Las casas " + data[i][0] + " y " + data[j][0] + " son homonimas.";
+                        homonimas[cont] = "Las casas:\n" + data[i][0] + " y " + data[j][0] + " son homonimas.";
                         cont++;
                         //data[i][0] + " y " + data[j][0] + " son homonimas";
                     }

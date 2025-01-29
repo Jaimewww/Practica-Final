@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import controller.Casas;
 /**
  *
- * @author JAIMEUNL
+ * @author CAEL
  */
 public class MTableCasas extends AbstractTableModel {
     
@@ -40,8 +40,8 @@ public class MTableCasas extends AbstractTableModel {
     @Override
     public String getColumnName(int i) {
         String[] columnNames = {
-            "Nro Casa",
-            "Nro Pisos",
+            "Nro. Casas",
+            "Nro. Pisos",
             "Largo (m)",
             "Ancho (m)"
         };
