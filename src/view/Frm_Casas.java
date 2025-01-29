@@ -6,6 +6,7 @@ package view;
 
 import controller.Casas;
 import javax.swing.JOptionPane;
+import util.Utiles;
 import view_table_model.MTableCasas;
 
 /**
@@ -16,6 +17,7 @@ public class Frm_Casas extends javax.swing.JFrame {
 
     Casas casas = new Casas();
     MTableCasas mTableCasas = new MTableCasas();
+    private Integer fila = -1;
 
     /**
      * Creates new form Frm_Casas
@@ -34,7 +36,70 @@ public class Frm_Casas extends javax.swing.JFrame {
         tbl_Casas.setModel(mTableCasas);
         tbl_Casas.updateUI();
     }
+    
+    private Boolean verificar(){
+        return (txt_npisos.getText().trim().isEmpty() || txt_largo.getText().trim().isEmpty() || txt_ancho.getText().trim().isEmpty());
+    }
+    
+    private void limpiar() {
+        txt_npisos.setText("");
+        txt_largo.setText("");
+        txt_ancho.setText("");
+        fila = -1;
+        tbl_Casas.clearSelection();
+    }
+    
+    private void cargarDatos(){
+        fila = tbl_Casas.getSelectedRow();
+        if(fila >= 0){
+            if(casas.getData()[fila] != null && casas.getData()[fila] != null){
+                txt_npisos.setText(casas.getData()[fila][1]);
+                txt_largo.setText(casas.getData()[fila][2]);
+                txt_ancho.setText(casas.getData()[fila][3]);
+            } else {
+                fila = -1;
+                txt_npisos.setText("");
+                txt_largo.setText("");
+                txt_ancho.setText("");
+                JOptionPane.showMessageDialog(null, "Seleccione un registro valido", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            fila = -1;
+            JOptionPane.showMessageDialog(null, "Selecciona un registro de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void insertar() {
+        if (verificar()) {
+            JOptionPane.showMessageDialog(null, "Porfavor, llene todos los campos");
+        } else {
+            if (Utiles.validate(txt_npisos.getText().trim())) {
+                Integer n_pisos = Utiles.transformStringInt(txt_npisos.getText().trim());
+                Float largo = Float.parseFloat(txt_largo.getText().trim());
+                Float ancho = Float.parseFloat(txt_ancho.getText().trim());
 
+                if (fila == -1) {
+                    if (casas.guardar(n_pisos, largo, ancho)) {
+                        JOptionPane.showMessageDialog(null, "Se ha registrado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
+                        limpiar();
+                        cargarTabla();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Hubo un error al guardar o ya se guardaron todas las casas", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    casas.getData()[fila][1] = n_pisos.toString();
+                    casas.getData()[fila][2] = largo.toString();
+                    casas.getData()[fila][3] = ancho.toString();
+                    JOptionPane.showMessageDialog(null, "Se ha modificado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
+                    limpiar();
+                    cargarTabla();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingresa un número válido para el número de pisos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,8 +117,18 @@ public class Frm_Casas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_result = new javax.swing.JTextArea();
         btn_Homonimas = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        btn_seleccionar = new javax.swing.JButton();
+        txt_ancho = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_npisos = new javax.swing.JTextField();
+        txt_largo = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btn_insertar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,17 +139,18 @@ public class Frm_Casas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COMPROBAR CASAS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 250, 50));
 
         btn_Generar.setBackground(new java.awt.Color(204, 255, 255));
-        btn_Generar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        btn_Generar.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         btn_Generar.setText("Generar dimensiones");
+        btn_Generar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Random", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 10))); // NOI18N
         btn_Generar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_GenerarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 180, -1));
+        jPanel1.add(btn_Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 240, -1));
 
         tbl_Casas.setBackground(new java.awt.Color(204, 255, 204));
         tbl_Casas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -92,32 +168,75 @@ public class Frm_Casas extends javax.swing.JFrame {
 
         txt_result.setEditable(false);
         txt_result.setColumns(20);
+        txt_result.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         txt_result.setRows(5);
         jScrollPane2.setViewportView(txt_result);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 260, 150));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 720, 110));
 
         btn_Homonimas.setBackground(new java.awt.Color(102, 153, 255));
         btn_Homonimas.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        btn_Homonimas.setText("Comprobar homonimas");
+        btn_Homonimas.setText("Comprobar casas homónimas");
         btn_Homonimas.setEnabled(false);
         btn_Homonimas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_HomonimasActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_Homonimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        jPanel1.add(btn_Homonimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 270, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        btn_seleccionar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btn_seleccionar.setText("Seleccionar");
+        btn_seleccionar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Manual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 0, 10))); // NOI18N
+        btn_seleccionar.setEnabled(false);
+        btn_seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_seleccionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, -1));
+
+        txt_ancho.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jPanel1.add(txt_ancho, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 120, -1));
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Ancho:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 90, -1));
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Nro Pisos:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, -1));
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Largo:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 90, -1));
+
+        txt_npisos.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jPanel1.add(txt_npisos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 120, -1));
+
+        txt_largo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jPanel1.add(txt_largo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 120, -1));
+
+        jButton2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton2.setText("Cargar casas");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, -1, -1));
+
+        jButton3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jButton3.setText("Guardar casas");
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, -1));
+
+        btn_insertar.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        btn_insertar.setText("Insertar");
+        btn_insertar.setEnabled(false);
+        btn_insertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_insertarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 210, -1));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -130,6 +249,19 @@ public class Frm_Casas extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,28 +269,18 @@ public class Frm_Casas extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 321, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(28, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(321, Short.MAX_VALUE)))
+                    .addGap(0, 321, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 210, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(125, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(125, Short.MAX_VALUE)))
+                    .addGap(0, 211, Short.MAX_VALUE)))
         );
 
         pack();
@@ -168,6 +290,8 @@ public class Frm_Casas extends javax.swing.JFrame {
         // TODO add your handling code here:
         crearArreglo();
         btn_Homonimas.setEnabled(true);
+        btn_seleccionar.setEnabled(true);
+        txt_result.setText("- Se ha generado los datos de las casas de forma ALEATORIA, ahora puedes verificar si existe alguna casa homónima clickeando Comprobar casas homónimas\n- También puedes editar a tu gusto los datos de la tabla de la siguiente forma:\n\nDar click en la FILA de la tabla a editar/dar click en seleccionar/editar cada parámetro/y finalmente, dar click en insertar");
     }//GEN-LAST:event_btn_GenerarActionPerformed
 
     private void btn_HomonimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomonimasActionPerformed
@@ -189,6 +313,18 @@ public class Frm_Casas extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_HomonimasActionPerformed
+
+    private void btn_seleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seleccionarActionPerformed
+        // TODO add your handling code here:
+        cargarDatos();
+        btn_insertar.setEnabled(true);
+    }//GEN-LAST:event_btn_seleccionarActionPerformed
+
+    private void btn_insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertarActionPerformed
+        // TODO add your handling code here:
+        insertar();
+        txt_result.setText("- Al insertar nuevos valores o sobreescribir valores existentes se guardaran en un formato más específico (lo recomendado)\n- El formato de guardado será: Pisos(número entero), Altura y Anchura(decimales)\n- Por esta razón si se quieren volver a comparar los resultados se recomienda editar/insertar todos los datos de forma manual");
+    }//GEN-LAST:event_btn_insertarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,13 +364,23 @@ public class Frm_Casas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Generar;
     private javax.swing.JButton btn_Homonimas;
+    private javax.swing.JButton btn_insertar;
+    private javax.swing.JButton btn_seleccionar;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbl_Casas;
+    private javax.swing.JTextField txt_ancho;
+    private javax.swing.JTextField txt_largo;
+    private javax.swing.JTextField txt_npisos;
     private javax.swing.JTextArea txt_result;
     // End of variables declaration//GEN-END:variables
 }

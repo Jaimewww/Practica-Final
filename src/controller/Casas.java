@@ -41,14 +41,40 @@ public class Casas {
             }
         }
     }
-
+    
+    public Integer verificar() {
+        Integer pos = -1;
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[1].length; j++) {
+                if (data[i][j] == null) {
+                    pos = i;
+                    break;
+                }
+            }
+            if(pos != -1)
+                break;
+        }
+        return pos;
+    }
+    
+    public Boolean guardar(Integer nro_casas, Float largo, Float ancho){
+        int pos = verificar();
+        if(pos >= 0){
+            data[pos][1] = nro_casas.toString();
+            data[pos][2] = largo.toString();
+            data[pos][3] = ancho.toString(); //operación ternaria
+            return true;
+        }
+        return false;
+    }
+    
     public void findHomonimas() {
         int cont = 0;
         for (int i = 0; i < data.length; i++) {
             for (int j = i + 1; j < data.length; j++) {
                 if (data[i][1].equals(data[j][1]) && data[i][2].equals(data[j][2]) && data[i][3].equals(data[j][3])) {
                     if (!data[i][0].equals(data[j][0])) {
-                        homonimas[cont] = "Las casas:\n" + data[i][0] + " y " + data[j][0] + " son homonimas.";
+                        homonimas[cont] = "Las casas:\n" + data[i][0] + " y " + data[j][0] + " son homónimas.";
                         cont++;
                         //data[i][0] + " y " + data[j][0] + " son homonimas";
                     }
