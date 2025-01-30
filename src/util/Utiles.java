@@ -88,7 +88,7 @@ public class Utiles {
         Random random = new Random();
         //2 - 10
         //2 + 11 - 2   -----  2 + (9) 
-        return minimo + random.nextFloat((maximo + 1) - minimo);
+        return minimo + random.nextFloat((maximo + 1) - minimo); //Nota: Existen versiones de java en las que este metodo no funciona, esta pensado para java 23
     }
 
     public static float redondear (float num) {
