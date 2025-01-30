@@ -42,7 +42,6 @@ public class Frm_Informe extends javax.swing.JFrame {
             cargarTabla();
             generar_datos.setEnabled(true);
             btn_guardar.setEnabled(true);
-            btn_cargar.setEnabled(true);
         }
     }
     
@@ -179,7 +178,6 @@ public class Frm_Informe extends javax.swing.JFrame {
 
         btn_cargar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btn_cargar.setText("Cargar Archivo");
-        btn_cargar.setEnabled(false);
         btn_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cargarActionPerformed(evt);
@@ -209,9 +207,9 @@ public class Frm_Informe extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_venta_mayor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbl_venta_menor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_venta_menor, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                    .addComponent(lbl_venta_mayor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -464,12 +462,20 @@ public class Frm_Informe extends javax.swing.JFrame {
             lbl_gastos.setText(String.valueOf(informe.calc_gastos()));
             
             String[] matriz_ventas = informe.data_ord(0);
-            lbl_venta_mayor.setText(matriz_ventas[1]);
-            lbl_venta_menor.setText(matriz_ventas[12]);
+            String mes_ventaMayor = informe.findMes(tblTablita, 0,matriz_ventas[1]);
+            lbl_venta_mayor.setText(mes_ventaMayor + ": " + matriz_ventas[1]);
+            String mes_ventaMenor = informe.findMes(tblTablita, 0, matriz_ventas[12]);
+            lbl_venta_menor.setText(mes_ventaMenor + ": " + matriz_ventas[12]);
+            
+            
             
             String[] matriz_gastos = informe.data_ord(1);
-            lbl_gasto_mayor.setText(matriz_gastos[1]);
-            lbl_gasto_menor.setText(matriz_gastos[12]);
+            String mes_gastoMayor = informe.findMes(tblTablita, 1, matriz_gastos[1]);
+            lbl_gasto_mayor.setText(mes_gastoMayor + ": " + matriz_gastos[1]);
+            String mes_gastoMenor = informe.findMes(tblTablita, 1, matriz_gastos[12]);
+            lbl_gasto_menor.setText(mes_gastoMenor + ": " + matriz_gastos[12]);
+            
+            
         } else{
             JOptionPane.showMessageDialog(null, "Llene todos los datos de la tabla", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -481,6 +487,12 @@ public class Frm_Informe extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(informe.cargarArchivo(direc)){
             cargarTabla();
+            generar_datos.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            input_venta.setEnabled(true);
+            input_gasto.setEnabled(true);
+            box_months.setEnabled(true);
+            btn_guardar.setEnabled(true);
         }
     }//GEN-LAST:event_btn_cargarActionPerformed
 

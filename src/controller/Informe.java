@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import javax.swing.JTable;
 import util.Utiles;
 /**
  *
@@ -102,6 +103,19 @@ public class Informe {
         }
 
         return fila_ord;
+    }
+    
+    public String findMes(JTable table, int fila, String valor) {
+        if (fila < 0 || fila >= data.length) {
+            return null;
+        }
+
+        for (int j = 0; j < data[fila].length; j++) {
+            if (data[fila][j] != null && data[fila][j].equals(valor)) {
+                return table.getColumnName(j);
+            }
+        }
+        return null;
     }
 
     
@@ -219,9 +233,9 @@ public class Informe {
         return false;
     }
     
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         Casas controllerCasa = new Casas();
         controllerCasa.crear();
         print_matriz(controllerCasa.getData());
-    }
+    }*/
 }

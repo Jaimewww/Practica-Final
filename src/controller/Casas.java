@@ -138,9 +138,9 @@ public class Casas {
                 String[] aux = lines.get(fila).split("\t");
                 for (int col = 0; col < m; col++) {
                     try {
-                        data[fila][col] = aux[col]; // Asignar el valor leído
+                        data[fila][col] = aux[col];
                     } catch (Exception e) {
-                        System.out.println("Error al procesar el dato en fila " + fila + ", columna " + col);
+                        //System.out.println("Error");
                         data[fila][col] = " ";
                     }
                 }
@@ -149,8 +149,8 @@ public class Casas {
             return true;
 
         } catch (Exception e) {
-            System.out.println("Error al cargar el archivo: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("error al cargar archivo ");
+            //e.printStackTrace();
             return false;
         }
     }
