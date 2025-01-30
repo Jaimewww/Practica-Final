@@ -84,12 +84,12 @@ public class Utiles {
         return minimo + random.nextInt((maximo + 1) - minimo);
     }
 
-    /*public static float generaNumeroRangoFloat(float minimo, float maximo) {
+    public static float generaNumeroRangoFloat(float minimo, float maximo) {
         Random random = new Random();
         //2 - 10
         //2 + 11 - 2   -----  2 + (9) 
         return minimo + random.nextFloat((maximo + 1) - minimo);
-    }*/
+    }
 
     public static float redondear (float num) {
        float aux = num*100.00f;

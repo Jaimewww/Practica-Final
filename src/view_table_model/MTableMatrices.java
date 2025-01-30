@@ -51,6 +51,4 @@ public class MTableMatrices extends AbstractTableModel {
             return data[i][j];
         }
     }
-    
-    
 }

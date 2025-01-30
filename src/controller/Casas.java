@@ -37,12 +37,18 @@ public class Casas {
         for (int i = 0; i < nroCasas.length; i++){
             nroCasas[i] = "Casa " + i;
         }*/
-
+        Object n_dimension;
         for (int i = 1; i < data.length; i++) {
             data[i - 1][0] = "Casa " + Integer.toString(i);
             for (int j = 1; j < data[0].length; j++) {
-                Integer n_dimension = Utiles.randomInt(1, 15);
-                data[i - 1][j] = n_dimension.toString();
+                if(j == 1){
+                    n_dimension = Utiles.randomInt(1, 15);
+                    data[i - 1][j] = n_dimension.toString(); 
+                } else{
+                    n_dimension = Utiles.redondear(Utiles.generaNumeroRangoFloat(5, 16));
+                    data[i - 1][j] = n_dimension.toString();
+                }
+                
             }
         }
     }
