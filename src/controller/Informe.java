@@ -115,9 +115,6 @@ public class Informe {
         System.out.println();
     }
     
-    
-    
-    
     public Boolean guardarDato(int mesIndex, String ventas, String gastos) {
         if (mesIndex < 1 || mesIndex > 12) {
             return false;
