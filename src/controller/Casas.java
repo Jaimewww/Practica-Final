@@ -4,6 +4,11 @@
  */
 package controller;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import util.*;
 
 /**
@@ -82,4 +87,66 @@ public class Casas {
             }
         }
     }
+    
+    public Boolean generateFile() {
+        if (data != null) {
+            String pathNotas = "files" + File.separatorChar + "casas" + File.separatorChar + "casas.txt";
+            try {
+                FileWriter file_matriz = new FileWriter(pathNotas);
+                for (int i = 0; i < data.length-1; i++) {
+                    String datos = "";
+                    for (int j = 0; j < data[0].length; j++) {
+                        datos += data[i][j] + "\t";
+                    }
+
+                    file_matriz.write(datos + "\n");
+                    file_matriz.flush();
+                }
+
+                file_matriz.close();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    public Boolean cargarArchivo(String direc) {
+        String pathNotas = "files" + File.separatorChar + direc + File.separatorChar + "casas.txt";
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(pathNotas));
+
+            if (lines.isEmpty()) {
+                System.out.println("archivo vacio.");
+                return false;
+            }
+
+            int n = lines.size(); //filas
+            int m = lines.get(0).split("\t").length;//columnas
+
+            crear();
+
+            for (int fila = 0; fila < n; fila++) {
+                String[] aux = lines.get(fila).split("\t");
+                for (int col = 0; col < m; col++) {
+                    try {
+                        data[fila][col] = aux[col]; // Asignar el valor leído
+                    } catch (Exception e) {
+                        System.out.println("Error al procesar el dato en fila " + fila + ", columna " + col);
+                        data[fila][col] = " ";
+                    }
+                }
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar el archivo: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
 }

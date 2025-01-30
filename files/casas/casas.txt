@@ -1,0 +1,10 @@
+Casa 1	12	14	12	
+Casa 2	1	6.0	6.0	
+Casa 3	11	14	7	
+Casa 4	2	5	2	
+Casa 5	12	3	15	
+Casa 6	2	12	15	
+Casa 7	12	14	13	
+Casa 8	14	8	2	
+Casa 9	1	5	3	
+Casa 10	4	2	2	

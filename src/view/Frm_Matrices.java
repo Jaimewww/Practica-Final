@@ -128,7 +128,6 @@ public class Frm_Matrices extends javax.swing.JFrame {
 
         btn_cargar.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btn_cargar.setText("Cargar Matriz");
-        btn_cargar.setEnabled(false);
         btn_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cargarActionPerformed(evt);
@@ -265,7 +264,7 @@ public class Frm_Matrices extends javax.swing.JFrame {
     private void btn_guardarArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarArchActionPerformed
         // TODO add your handling code here:
         matrices.generateFile(matrices.getData(), direc);
-        btn_cargar.setEnabled(true);
+        //btn_cargar.setEnabled(true);
         txta_ayuda.setText("Haz guardado tu matriz exitosamente, ahora es editable dentro de tus archivos de NetBeans, para ello dirigete a: (NetBeansProjects\\Practica-Final\\files\\matrices) y edítala a tu gusto. Una vez acabes, da click al botón Cargar Matriz \n\nNOTA IMPORTANTE: No olvides de guardar tu archivo txt cuando lo edites, caso contrario no se cargaran los cambios del archivo txt en el programa");
     }//GEN-LAST:event_btn_guardarArchActionPerformed
 

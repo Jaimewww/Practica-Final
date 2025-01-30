@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import util.Utiles;
-import controller.Casas.*;
 /**
  *
  * @author JAIMEUNL
@@ -155,8 +154,6 @@ public class Informe {
                 Float valor = Utiles.transformStringFloat(data[1][j]);
                 if (valor != null) {
                     total_gastos += valor;
-                } else {
-                    System.err.println("Valor nulo en gastos para índice " + j);
                 }
             }
         }
@@ -170,7 +167,7 @@ public class Informe {
             List<String> lines = Files.readAllLines(Paths.get(pathNotas));
 
             if (lines.isEmpty()) {
-                System.out.println("El archivo está vacío.");
+                System.out.println("archivo vacio.");
                 return false;
             }
             

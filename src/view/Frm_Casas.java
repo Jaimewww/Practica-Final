@@ -5,6 +5,7 @@
 package view;
 
 import controller.Casas;
+import controller.Matrices;
 import javax.swing.JOptionPane;
 import util.Utiles;
 import view_table_model.MTableCasas;
@@ -14,8 +15,9 @@ import view_table_model.MTableCasas;
  * @author CAEL
  */
 public class Frm_Casas extends javax.swing.JFrame {
-
+    private final String direct = "casas";
     Casas casas = new Casas();
+    Matrices matrices = new Matrices();
     MTableCasas mTableCasas = new MTableCasas();
     private Integer fila = -1;
 
@@ -222,10 +224,20 @@ public class Frm_Casas extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButton2.setText("Cargar casas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jButton3.setText("Guardar casas");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, -1, -1));
 
         btn_insertar.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
@@ -324,7 +336,21 @@ public class Frm_Casas extends javax.swing.JFrame {
         // TODO add your handling code here:
         insertar();
         txt_result.setText("- Al insertar nuevos valores o sobreescribir valores existentes se guardaran en un formato más específico (lo recomendado)\n- El formato de guardado será: Pisos(número entero), Altura y Anchura(decimales)\n- Por esta razón si se quieren volver a comparar los resultados se recomienda editar/insertar todos los datos de forma manual");
+        btn_insertar.setEnabled(false);
     }//GEN-LAST:event_btn_insertarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+       //matrices.generateFile(casas.getData(), direct);
+       casas.generateFile();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(casas.cargarArchivo(direct)){
+            cargarTabla();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
