@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/view_table_model/MTableInforme.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/view/Frm_Casas.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/view/Frm_Informe.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/util/Utiles.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/view_table_model/MTableCasas.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/controller/Casas.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/view/Frm_Matrices.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/controller/Informe.java</file>
-            <file>file:/C:/Users/JAIMEUNL/Documents/NetBeansProjects/Practica-Final/src/controller/Matrices.java</file>
+            <file>file:/C:/Users/CAEL/Documents/NetBeansProjects/Practica-Final/src/view/Frm_Casas.java</file>
+            <file>file:/C:/Users/CAEL/Documents/NetBeansProjects/Practica-Final/src/controller/Casas.java</file>
+            <file>file:/C:/Users/CAEL/Documents/NetBeansProjects/Practica-Final/src/util/Utiles.java</file>
+            <file>file:/C:/Users/CAEL/Documents/NetBeansProjects/Practica-Final/src/view_table_model/MTableCasas.java</file>
+            <file>file:/C:/Users/CAEL/Documents/NetBeansProjects/Practica-Final/src/view_table_model/MTableMatrizResult.java</file>
+            <file>file:/C:/Users/CAEL/Documents/NetBeansProjects/Practica-Final/src/view/Frm_Matrices.java</file>
         </group>
     </open-files>
 </project-private>

@@ -154,7 +154,7 @@ public class Frm_Casas extends javax.swing.JFrame {
         });
         jPanel1.add(btn_Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 240, -1));
 
-        tbl_Casas.setBackground(new java.awt.Color(204, 255, 204));
+        tbl_Casas.setBackground(new java.awt.Color(106, 195, 185));
         tbl_Casas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tbl_Casas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

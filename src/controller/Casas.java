@@ -68,12 +68,12 @@ public class Casas {
         return pos;
     }
     
-    public Boolean guardar(Integer nro_casas, Float largo, Float ancho){
+    public Boolean guardar(Integer nro_pisos, Float largo, Float ancho){
         int pos = verificar();
         if(pos >= 0){
-            data[pos][1] = nro_casas.toString();
+            data[pos][1] = nro_pisos.toString();
             data[pos][2] = largo.toString();
-            data[pos][3] = ancho.toString(); //operación ternaria
+            data[pos][3] = ancho.toString();
             return true;
         }
         return false;
