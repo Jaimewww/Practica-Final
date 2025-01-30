@@ -191,7 +191,7 @@ public class Informe {
                 String[] aux = lines.get(fila).split("\t");
                 for (int col = 0; col < m; col++) {
                     try {
-                        data[fila][col] = aux[col]; // Asignar el valor leído
+                        data[fila][col] = aux[col];
                     } catch (Exception e) {
                         System.out.println("Error al procesar el dato en fila " + fila + ", columna " + col);
                         data[fila][col] = " ";

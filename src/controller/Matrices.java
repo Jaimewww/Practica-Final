@@ -79,7 +79,7 @@ public class Matrices {
                         try {
                             data[fila][col] = Float.parseFloat(aux[col]);
                         } catch (NumberFormatException e) {
-                            //System.out.println("Error al convertir: " + aux[col]);
+                            //System.out.println("Error");
                             data[fila][col] = 0.0f;
                         }
                     } else {
@@ -92,8 +92,7 @@ public class Matrices {
             return true;
 
         } catch (Exception e) {
-            //System.out.println("error al cargar:  " + e.getMessage());
-            e.printStackTrace();
+            //System.out.println("error al cargar");
             return false;
         }
     }

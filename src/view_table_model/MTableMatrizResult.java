@@ -4,7 +4,6 @@
  */
 package view_table_model;
 
-import controller.Matrices;
 import controller.Matriz_result;
 import javax.swing.table.AbstractTableModel;
 
