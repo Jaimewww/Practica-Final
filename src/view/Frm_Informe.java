@@ -18,7 +18,6 @@ public class Frm_Informe extends javax.swing.JFrame {
      */
     private Informe informe = new Informe();
     private MTableInforme mTableInforme = new MTableInforme();
-    private Utiles utiles = new Utiles();
     private final String direc = "informes";
     
     private void cargarTabla(){
@@ -406,8 +405,8 @@ public class Frm_Informe extends javax.swing.JFrame {
         String ventas = input_venta.getText() != null ? input_venta.getText() : ""; //ventas
         String gastos = input_gasto.getText() != null ? input_gasto.getText() : "";
         if (!ventas.isEmpty() && !gastos.isEmpty()) {
-            System.out.println(mes + "\n" + utiles.transformStringFloat(ventas) + "\n" + utiles.transformStringFloat(gastos));
-            if (utiles.validate(ventas) && utiles.validate(gastos)) {
+            System.out.println(mes + "\n" + Utiles.transformStringFloat(ventas) + "\n" + Utiles.transformStringFloat(gastos));
+            if (utiles.validate(ventas) && Utiles.validate(gastos)) {
                 return true;
             }else{
                 JOptionPane.showMessageDialog(null, "Ingrese un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
@@ -456,7 +455,8 @@ public class Frm_Informe extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(informe.verificar()){
             String total_ventas = String.valueOf(informe.calc_ventas());
-            Float promedio_ventas = utiles.transformStringFloat(total_ventas)/12;
+            Float promedio_ventas = Utiles.transformStringFloat(total_ventas)/12;
+            promedio_ventas = Utiles.redondear(promedio_ventas);
             lbl_promVentas.setText(promedio_ventas.toString());
             lbl_ventas.setText(total_ventas);
             lbl_gastos.setText(String.valueOf(informe.calc_gastos()));

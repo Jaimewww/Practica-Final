@@ -150,12 +150,10 @@ public class Informe {
                 Float valor = Utiles.transformStringFloat(data[0][j]);
                 if (valor != null) {
                     total_ventas += valor;
-                } else {
-                    System.err.println("Valor nulo en ventas para índice " + j);
                 }
             }
         }
-        return total_ventas;
+        return Utiles.redondear(total_ventas);
     }
 
     public Float calc_gastos() {
@@ -168,7 +166,7 @@ public class Informe {
                 }
             }
         }
-        return total_gastos;
+        return Utiles.redondear(total_gastos);
     }
     
     public Boolean cargarArchivo(String direc) {
