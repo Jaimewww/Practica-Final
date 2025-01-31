@@ -406,7 +406,7 @@ public class Frm_Informe extends javax.swing.JFrame {
         String gastos = input_gasto.getText() != null ? input_gasto.getText() : "";
         if (!ventas.isEmpty() && !gastos.isEmpty()) {
             System.out.println(mes + "\n" + Utiles.transformStringFloat(ventas) + "\n" + Utiles.transformStringFloat(gastos));
-            if (utiles.validate(ventas) && Utiles.validate(gastos)) {
+            if (Utiles.validate(ventas) && Utiles.validate(gastos)) {
                 return true;
             }else{
                 JOptionPane.showMessageDialog(null, "Ingrese un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
